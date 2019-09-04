@@ -1,0 +1,404 @@
+[
+    {
+        "name": "PARC_EOLIEN_S",
+        "description": "Table des parcs éoliens",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_PARC",
+                    "description": "Identifiant du parc éolien composé du numéro du département et d'un numéro incrémenté",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "CODE_ICPE",
+                    "description": "Code de l'ICPE (autres appellations : code S3IC, code GIDIC) : il s'agit d'un code unique sur 10 caractères, constitué d'une code régional sur 4 caractères, un point, et le code de l'établissement sur 5 caractères (préfixe 0 implicite et/ou explicite)",
+                    "constraints": {
+                        "pattern": "^\\d{4}\\.\\d{5}$",
+                        "required": true
+                    }
+                },
+                {
+                    "name": "ID_ZDE",
+                    "description": "Identifiant de la ZDE à laquelle appartient le parc éolien. (Obsolète depuis la version v1.1 - doit être NULL)"
+                },
+                {
+                    "name": "NOM_PARC",
+                    "description": "Nom utilisé pour désigner le parc éolien",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "DATE_CREA"
+                },
+                {
+                    "name": "EXPLOITANT",
+                    "description": "Nom de la société exploitant le parc éolien au moment de sa création"
+                },
+                {
+                    "name": "geometrie",
+                    "description": "géométrie surfacique",
+                    "type": "geojson"
+                }
+            ],
+            "primaryKey": "ID_PARC",
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:27:18",
+            "updated": "2019-06-25 15:51:12"
+        }
+    },
+    {
+        "name": "AUTORISATION_EOLIEN",
+        "description": "Table établissant la relation entre l'autorisation administrative et le parc éolien",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_AU",
+                    "description": "Identifiant de l'autorisation unique correspondant au numéro attribué par la commune lors du dépôt de la demande.",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "ID_PARC",
+                    "description": "Identifiant du parc éolien relevant de l'autorisation unique. Clé étrangère"
+                },
+                {
+                    "name": "DEMANDEUR",
+                    "description": "Nom du pétitionnaire déposant la demande d'autorisation unique",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "NOMDEVELOP"
+                },
+                {
+                    "name": "DATE_DEPOT",
+                    "description": "Date de dépôt de l'autorisation unique"
+                },
+                {
+                    "name": "DATDECISIO",
+                    "description": "Date de la décision relative à l'autorisation unique"
+                },
+                {
+                    "name": "ETAT_AU",
+                    "description": "État de la demande d'autorisation unique: déposé (DE), accordé (AC), refusé (RE), modifié (MO), abandonné (AB), annulé (AN), inconnu (NC)",
+                    "constraints": {
+                        "enum": [
+                            "DE",
+                            "AC",
+                            "RE",
+                            "MO",
+                            "AB",
+                            "AN",
+                            "NC"
+                        ],
+                        "required": true
+                    }
+                },
+                {
+                    "name": "CONTENTIEU",
+                    "description": "Existence d'une procédure de contentieux en cours",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "PU_NOMINAL",
+                    "description": "Somme des puissances nominales des éoliennes prévues dans le projet de parc éolien (exprimé en mégawatt)"
+                },
+                {
+                    "name": "NBMAT_DEM",
+                    "description": "Nombre d'éoliennes figurant dans la demande d'autorisation unique"
+                },
+                {
+                    "name": "NBMAT_ACC",
+                    "description": "Nombre d'éoliennes accordées par le préfet"
+                }
+            ],
+            "primaryKey": "ID_AU",
+            "foreignKeys": {
+                "fields": "ID_PARC",
+                "reference": {
+                    "resource": "PARC_EOLIEN_S",
+                    "fields": "ID_PARC"
+                }
+            },
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:27:18",
+            "updated": "2019-06-25 15:51:12"
+        }
+    },
+    {
+        "name": "POSTE_LIVRAISON_P",
+        "description": "Table des postes de livraison",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_POSTE",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "ID_REG"
+                },
+                {
+                    "name": "ID_PARC"
+                },
+                {
+                    "name": "N_PARCEL"
+                },
+                {
+                    "name": "IRIS",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "EXPLOITANT",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "SIRET",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "POSTESRCE"
+                },
+                {
+                    "name": "VOLTAGE",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "PU_MAX",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "PU_SERV"
+                },
+                {
+                    "name": "PU_RETR"
+                },
+                {
+                    "name": "DATE_RACC",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "DATE_RETR"
+                },
+                {
+                    "name": "geometrie",
+                    "description": "géométrie ponctuelle",
+                    "type": "geojson"
+                }
+            ],
+            "primaryKey": "ID_POSTE",
+            "foreignKeys": {
+                "fields": "ID_PARC",
+                "reference": {
+                    "resource": "PARC_EOLIEN_S",
+                    "fields": "ID_PARC"
+                }
+            },
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:27:18",
+            "updated": "2019-06-25 15:51:12"
+        }
+    },
+    {
+        "name": "MAT_EOLIEN_P",
+        "description": "Table des mâts éoliens dont le permis de construire a été accordé",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_MAT",
+                    "description": "Identifiant de l'éolienne composé du numéro du permis de construire et d'un numéro incrémenté respectant le format ID_AU + '_nnn' (exemple de suffixe : _001)",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "ID_ZDE",
+                    "description": "Identifiant de la ZDE incluant le mât éolien dans son périmètre. (Obsolète depuis la version v1.1 - doit être NULL)"
+                },
+                {
+                    "name": "ID_PARC",
+                    "description": "Identifiant du parc éolien qui inclut le mât éolien. Clé étrangère"
+                },
+                {
+                    "name": "ID_POSTE",
+                    "description": "Identifiant du poste de livraison auquel est relié le mât éolien"
+                },
+                {
+                    "name": "ID_AU",
+                    "description": "Identifiant de l'autorisation unique dont relève le mât éolien. Clé étrangère"
+                },
+                {
+                    "name": "NUMERO"
+                },
+                {
+                    "name": "N_PARCEL",
+                    "description": "Numéro thématique national de la parcelle cadastrale dans laquelle se situe le pied du mat"
+                },
+                {
+                    "name": "HT_MAX",
+                    "description": "Hauteur de l'éolienne en bout de pâle par rapport au sol. En mètres",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "HT_MAT",
+                    "description": "Hauteur du mât. En mètres",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "HT_NACELLE",
+                    "description": "Hauteur de la nacelle. En mètres"
+                },
+                {
+                    "name": "DIAM_ROTOR",
+                    "description": "Diamètre du rotor (comprenant le moyeu et les pâles). En mètres"
+                },
+                {
+                    "name": "PU_NOMINAL",
+                    "description": "Puissance nominale de l'éolienne (exprimé en mégawatt)",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "X_PC",
+                    "description": "Abscisse des coordonnées de la position du mat de l'éolienne fournie dans le dossier de permis de construire éolien"
+                },
+                {
+                    "name": "Y_PC",
+                    "description": "Ordonnée des coordonnées de la position du mat de l'éolienne fournie dans le dossier de permis de construire éolien"
+                },
+                {
+                    "name": "SYS_COORD",
+                    "description": "Code EPSG ou IGNF du système de coordonnées utilisé dans le dossier de permis de construire éolien"
+                },
+                {
+                    "name": "ALT_BASE",
+                    "description": "Altitude en mètres de la base de l'éolienne",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "ETAT_MAT",
+                    "description": "État physique de l'éolienne: construite (CO), non construite (NCO), démontée (DM), autre état (AU)",
+                    "constraints": {
+                        "enum": [
+                            "COS",
+                            "CHS",
+                            "NCO",
+                            "DE",
+                            "AU"
+                        ],
+                        "required": true
+                    }
+                },
+                {
+                    "name": "DATE_PROD",
+                    "description": "Date de mise en production. Si seule l'année de mise en service est connue, la date est renseignée par convention au 1er janvier de l'année et s'écrit 01/01/AAAA"
+                },
+                {
+                    "name": "DATE_REAL",
+                    "description": "Date de fin d&rsquo;achèvement de la construction. Si seule l'année de mise en service est connue, la date est renseignée par convention au 1er janvier de l'année et s'écrit 01/01/AAAA"
+                },
+                {
+                    "name": "DATE_DEMOL",
+                    "description": "Date de démantèlement de l'éolienne qui correspond à la date du permis de démolir"
+                },
+                {
+                    "name": "EN_SERVICE",
+                    "description": "Mise en service effective de l'éolienne (OUI, NON,NR,ND)",
+                    "constraints": {
+                        "enum": [
+                            "OUI",
+                            "NON",
+                            "NR",
+                            "ND"
+                        ],
+                        "required": true
+                    }
+                },
+                {
+                    "name": "SRCE_GEOM",
+                    "description": "Type de carte, de référentiel géographique utilisé en tant que source de géoréférencement lors de la création de la géométrie"
+                },
+                {
+                    "name": "PRECIS_POS",
+                    "description": "Précision estimée du positionnement de l'objet éolienne figurant dans le jeu de données (M, DC, HM, NE)",
+                    "constraints": {
+                        "enum": [
+                            "M",
+                            "DC",
+                            "HM",
+                            "NE"
+                        ],
+                        "required": true
+                    }
+                },
+                {
+                    "name": "geometrie",
+                    "description": "géométrie ponctuelle",
+                    "type": "geojson"
+                }
+            ],
+            "primaryKey": "ID_MAT",
+            "foreignKeys": [
+                {
+                    "fields": "ID_PARC",
+                    "reference": {
+                        "resource": "PARC_EOLIEN_S",
+                        "fields": "ID_PARC"
+                    }
+                },
+                {
+                    "fields": "ID_AU",
+                    "reference": {
+                        "resource": "AUTORISATION_EOLIEN",
+                        "fields": "ID_AU"
+                    }
+                },
+                {
+                    "fields": "ID_POSTE",
+                    "reference": {
+                        "resource": "POSTE_LIVRAISON_P",
+                        "fields": "ID_POSTE"
+                    }
+                }
+            ],
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:27:18",
+            "updated": "2019-06-25 15:51:12"
+        }
+    }
+]

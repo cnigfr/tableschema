@@ -1,0 +1,98 @@
+[
+    {
+        "name": "SRE_EOLIEN_S",
+        "description": "Table régionale des schémas régionaux éoliens représentés par leur périmètre d'effet correspondant aux zones favorables à l'éolien.",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_SRE",
+                    "description": "Identifiant SRE composé du numéro de la région et d'un numéro incrémenté correspondant à la version du schéma",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "NOM_SRE",
+                    "description": "Nom du schéma régional éolien",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "SRE_PU2020",
+                    "description": "Objectif de puissance régionale totale cible à l'horizon 2020 définie pour l'ensemble du SRE (exprimé en mégawatt)"
+                },
+                {
+                    "name": "SRE_PU_INS",
+                    "description": "Indicateur calculé correspondant à la somme des puissances de chaque éolienne installée et en service sur l'emprise géographique du SRE (exprimé en mégawatt)"
+                },
+                {
+                    "name": "DATEADOPT",
+                    "description": "Date d'adoption du schéma régional éolien",
+                    "constraints": {
+                        "required": true
+                    }
+                },
+                {
+                    "name": "DATEREVIS",
+                    "description": "Date de révision du schéma régional éolien"
+                },
+                {
+                    "name": "LIEN_SRE",
+                    "description": "Nom ou référence permettant d'accéder au fichier contenant le SRE adopté"
+                },
+                {
+                    "name": "CODE_ZFE",
+                    "description": "Code alphabétique permettant de différencier chaque zone favorable à l'éolien"
+                },
+                {
+                    "name": "ZFE_PU2020",
+                    "description": "Objectif de puissance à l'horizon 2020 fixé, le cas échéant, par le SRE pour la zone favorable (exprimé en mégawatt)"
+                },
+                {
+                    "name": "geometrie",
+                    "description": "géométrie surfacique",
+                    "type": "geojson"
+                }
+            ],
+            "primaryKey": "ID_SRE",
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:26:32",
+            "updated": "2019-06-24 11:15:11"
+        }
+    },
+    {
+        "name": "SRE_COMMUNE_FAVORABLE",
+        "description": "Table régionale établissant la liste des communes identifiées dans chaque SRE",
+        "schema": {
+            "fields": [
+                {
+                    "name": "ID_SRE",
+                    "description": "Identifiant SRE composé du numéro de la région et d'un numéro incrémenté. Clé étrangère"
+                },
+                {
+                    "name": "CODE_COM",
+                    "description": "Code INSEE de la commune impactée"
+                },
+                {
+                    "name": "ANNEE_COG",
+                    "description": "Millésime ou année de référence du code officiel géographique de l'INSEE utilisé pour obtenir le code INSEE de la commune. L'année AAAA d'un millésime s'écrit par convention 01/01/AAAA"
+                }
+            ],
+            "foreignKeys": {
+                "fields": "ID_SRE",
+                "reference": {
+                    "resource": "SRE_EOLIEN_S",
+                    "fields": "ID_SRE"
+                }
+            },
+            "$schema": "https://frictionlessdata.io/schemas/table-schema.json",
+            "author": "Richard Mitanchey",
+            "version": "2.0",
+            "created": "2017-06-07 10:26:32",
+            "updated": "2019-06-24 11:15:11"
+        }
+    }
+]

@@ -1,0 +1,113 @@
+{
+ "name": "tableschema",
+ "children": [
+  {
+   "name": "name"
+  },
+  {
+   "name": "description"
+  },
+  {
+   "name": "schema",
+   "children": [
+    {
+     "name": "fields",
+     "children": [
+      {
+	   "name": "[]",
+	   "children": [
+	    {
+		 "name": "name"
+		},
+	    {
+		 "name": "title"
+		},
+	    {
+		 "name": "format"
+		},
+		{
+		 "name": "description"
+		},
+		{
+		 "name": "type"
+		},
+		{
+		 "name": "rdfType"
+		},
+		{
+		 "name": "constraints",
+		 "children": [
+		  {
+		   "name": "required"
+		  },
+		  {
+		   "name": "unique"
+		  },
+		  {
+		   "name": "minLength"
+		  },
+		  {
+		   "name": "maxLength"
+		  },
+		  {
+		   "name": "minimum"
+		  },
+		  {
+		   "name": "maximum"
+		  },
+		  {
+		   "name": "pattern"
+		  },
+		  {
+		   "name": "enum"
+		  }
+		 ]
+		}
+	   ]
+	  }
+     ]
+    },
+    {
+     "name": "primaryKey"
+    },
+    {
+     "name": "foreignKey",
+	 "children": [
+	  {
+	   "name": "fields"
+	  },
+	  {
+	   "name": "reference",
+	   "children": [
+	    {
+		 "name": "resource"
+		},
+		{
+		 "name": "fields"
+		}
+	   ]
+	  }
+	 ]
+    },
+    {
+     "name": "$schema"
+    },
+    {
+     "name": "author"
+    },
+    {
+     "name": "version"
+    },
+    {
+     "name": "missingValues"
+    },
+    {
+     "name": "created"
+    },
+    {
+     "name": "updated"
+    }
+   ]
+  }
+ ]
+}
